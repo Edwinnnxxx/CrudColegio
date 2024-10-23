@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${titulo}"></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+  <h3 th:text="${cuerpo}" class="text-center"></h3>
+
+  <div><a class="btn btn-dark m-2" th:href="@{/}">Volver</a></div>
+
+  <form th:action="@{/api/estudiante/guardarAsignacion}" method="post">
+    <div class="form-group">
+      <label for="profesor">Profesor</label>
+      <select id="profesor" name="profesorId" class="form-control" required>
+        <option th:each="profesor : ${profesores}"
+                th:value="${profesor.codigo}"
+                th:text="${profesor.nombre}">Profesor</option>
+      </select>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="grupo">Grupo</label>
+      <select id="grupo" name="grupoId" class="form-control" required>
+        <option th:each="grupo : ${grupos}"
+                th:value="${grupo.noGrupo}"
+                th:text="${grupo.semestre}">Grupo</option>
+      </select>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="estudiantes">Estudiantes</label>
+      <select id="estudiantes" name="estudiantesIds" multiple class="form-control" required>
+        <option th:each="estudiante : ${estudiantes}"
+                th:value="${estudiante.codigo}"
+                th:text="${estudiante.nombre}">Estudiante</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-4">Asignar</button>
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6F5KvP1ItDkKc59I5rEgvhU8AB1Bkz5KWpK0KNI0R5G7"
+        crossorigin="anonymous"></script>
+</body>
+</html>
